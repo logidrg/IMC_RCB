@@ -1,6 +1,7 @@
 package br.edu.utfpr.calculaimckotlin
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity() { //fim da MainActivity
             false
         }
         Log.d( "ciclo_de_vida", "onCreate() executado" )
+
+        if ( savedInstanceState != null ) {
+            val imc = savedInstanceState.getString( "imc" )
+            tvResultado.text = imc
+        }
 
     } //fim do onCreate()
 
@@ -106,6 +112,11 @@ class MainActivity : AppCompatActivity() { //fim da MainActivity
     override fun onRestart() {
         super.onRestart()
         Log.d( "ciclo_de_vida", "onRestart() executado" )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString( "imc", tvResultado.text.toString())
     }
 
 }
