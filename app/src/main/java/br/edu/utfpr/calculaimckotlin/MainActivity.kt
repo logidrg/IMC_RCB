@@ -1,6 +1,7 @@
 package br.edu.utfpr.calculaimckotlin
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -11,7 +12,7 @@ import java.text.NumberFormat
 import java.util.Locale
 import kotlin.math.pow
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() { //fim da MainActivity
 
     private lateinit var etPeso : EditText
     private lateinit var etAltura : EditText
@@ -41,7 +42,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText( this, getString(R.string.long_limpar), Toast.LENGTH_SHORT ).show()
             false
         }
-    }
+        Log.d( "ciclo_de_vida", "onCreate() executado" )
+
+    } //fim do onCreate()
 
     private fun btLimparOnClick() {
         etPeso.setText( "" )
@@ -75,9 +78,38 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d( "ciclo_de_vida", "onStart() executado" )
+    }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d( "ciclo_de_vida", "onResume() executado" )
+    }
 
-} //fim da MainActivity
+    override fun onPause() {
+        super.onPause()
+        Log.d( "ciclo_de_vida", "onPause() executado" )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d( "ciclo_de_vida", "onStop() executado" )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d( "ciclo_de_vida", "onDestroy() executado" )
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d( "ciclo_de_vida", "onRestart() executado" )
+    }
+
+}
+
 
 class Calculo {
     fun calculaIMC( peso : Double, altura : Double ) : String {
